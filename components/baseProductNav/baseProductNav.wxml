@@ -1,0 +1,30 @@
+<!--components/baseProductNav/baseProductNav.wxml-->
+<view class="nav-box">
+    <view class="weui-flex">
+        <view class="weui-flex__item nav-icon-sort">
+            <navigator url="/pages/product/productClass/productClass" hover-class="none">
+                <icon class="iconfont icon-sort"></icon>
+            </navigator>
+        </view>
+        <view class="weui-flex__item">
+            <span style="position: relative" class="{{state==3 ? 'active':''}}" data-state="3" bindtap="clickChangeNav">
+                <span>价格</span>
+                <icon class="iconfont icon-sortup {{!priceSortClass?'no-active':''}}"></icon>
+                <icon class="iconfont icon-sortdown {{priceSortClass?'no-active':''}}"></icon>
+            </span>
+        </view>
+        <view class="weui-flex__item">
+            <span class="{{state==2 ? 'active':''}}" data-state="2" bindtap="clickChangeNav">上架</span>
+        </view>
+        <view class="weui-flex__item">
+            <span class="{{state==1 ? 'active':''}}" data-state="1" bindtap="clickChangeNav">销量</span>
+        </view>
+        <view class="weui-flex__item nav-icon-filter" bindtap="clickGoProductScreen">
+            <icon class="iconfont icon-filter"></icon>
+        </view>
+        <view class="weui-flex__item nav-right" bindtap="doChangeList">
+            <icon class="iconfont {{showBigProductList?'icon-202':'icon-apps'}}"></icon>
+        </view>
+    </view>
+
+</view>

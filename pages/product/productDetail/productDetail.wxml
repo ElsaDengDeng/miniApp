@@ -1,0 +1,178 @@
+<!--pages/product/productDetail/productDetail.wxml-->
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class="goods-detail">
+    <view class="swiper-btn back-last-page" bindtap="GoBack">
+        <icon class="iconfont icon-ico-left-arrow"></icon>
+    </view>
+    <view class="swiper-btn shopping-cart-btn" bindtap="GoCart">
+        <icon class="iconfont icon-gouwuche"></icon>
+    </view>
+    <view class="goods-details-content">
+        <!--picture show start-->
+        <swiper class="img-swiper" indicator-dots="{{indicatorDots}}"
+                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-dots="{{indicatorDots}}" indicator-color="indicatorColor" indicator-active-color="{{indicatorActiveColor}}">
+            <block wx:for="{{productDetailData.picData}}">
+                <swiper-item>
+                    <image src="{{item}}" class="slide-image" />
+                </swiper-item>
+            </block>
+        </swiper>
+        <!--picture show end-->
+        <!--basic-info start-->
+        <view class="basic-info">
+            <view class="weui-article__h1 name">{{productDetailData.fullName}}</view>
+            <view class="weui-article__p code">编号：{{productDetailData.code}}</view>
+            <view class="weui-flex price">
+                <view class="weui-flex__item">
+                    <text>批发价：<text class="price-color">¥{{productDetailData.tradePrice}}</text></text>
+                    <text class="tdline"></text>
+                </view>
+                <view class="weui-flex__item">市场价：¥{{productDetailData.marketPrice}}</view>
+            </view>
+            <view class="weui-flex begin-number">
+                <view class="weui-flex__item">
+                    <text wx:if="{{productDetailData.minQty>0}}">起订量：{{productDetailData.minQty}}{{productDetailData.unit}}</text>
+                    <text wx:if="showStockQty != 0"></text>
+                </view>
+                <view class="weui-flex__item">库存：{{productDetailData.howToShowStockQty}}</view>
+            </view>
+        </view>
+        <!--basic-info end-->
+        <view class="sales-style" bindtap="showPromotionPopue" wx:if="productDetailData.promotions && productDetailData.promotions.length">
+            <view class="sales-container">
+                <view class="sales-skus-detail">
+                    <view wx:for="{{promotions}}" class="sale-skus-item">
+                        <block wx:if="{{item.type==1 || item.type==3&&item.mode==1}}">
+                            <view class="sales-title sales-title-gift" wx:if="{{item.style == 1}}">买赠</view>
+                            <view class="sales-title sales-title-desc" wx:if="{{item.style == 2}}">直降</view>
+                            <view class="sales-title sales-title-discount" wx:if="{{item.style == 3}}">打折</view>
+                        </block>
+                        <block wx:if="{{item.type==2 || item.type==3&&item.mode==2}}">
+                            <view class="sales-title sales-title-gift" wx:if="{{item.style == 1}}">满赠</view>
+                            <view class="sales-title sales-title-desc" wx:if="{{item.style == 2}}">满减</view>
+                            <view class="sales-title sales-title-discount" wx:if="{{item.style == 3}}">满折</view>
+                        </block>
+                        <view wx:if="{{item.rules.length>0}}" class="skus-list">
+                            <view wx:if="{{item.type==3}}">
+                                <text>{{item.name}}</text>
+                            </view>
+                            <view wx:if="{{item.type==1&&item.style==1}}">
+                                <block wx:if="{{item.isLadder}}">
+                                    {{item.name}} 订购数量满 <text class="num-color">{{item.rules[0].condition}}</text><text wx:for="{{productDetailData.units}}" wx:for-item="unit}"><text wx:if="{{unit.isBase}}">{{unit.unitName}}</text></text>,
+                                    获赠品<text class="gift-name">{{item.rules[0].name}}</text><text class="num-color">{{item.rules[0].value}}</text>{{item.rules[0].unit}}
+                                </block>
+                                <block wx:if="{{!item.isLadder}}">
+                                    {{item.name}} 订购数量满 <text class="num-color">{{item.rules[0].condition}}</text><text wx:for="{{productDetailData.units}}" wx:for-item="unit}"><text wx:if="{{unit.isBase}}">{{unit.unitName}}</text></text>,
+                                    获赠品<text class="gift-name">{{item.rules[0].name}}</text><text class="num-color">{{item.rules[0].value}}</text>{{item.rules[0].unit}}
+                                </block>
+                            </view>
+                            <view wx:if="{{item.type==1&&item.style==2}}">
+                                <block wx:if="{{item.isLadder}}">
+                                    {{item.name}}订购数量满 <text class="num-color">{{item.rules[0].condition}}</text>
+                                    <text wx:for="{{productDetailData.units}}" wx:for-item="unit">
+                                        <text wx:if="{{unit.isBase}}">{{unit.unitName}}</text>
+                                    </text>,
+                                    批发价统一降至 <text class="num-color">{{item.rules[0].value}}</text>元
+                                </block>
+                                <block wx:if="{{!item.isLadder}}">
+                                    {{item.name}} 批发价统一降至 <text class="num-color">{{item.rules[0].value}}</text>元
+                                </block>
+                            </view>
+                            <view wx:if="{{item.type==1&&item.style==3}}">
+                                <block wx:if="{{item.isLadder}}">
+                                    {{item.name}}订购数量满 <text class="num-color">{{item.rules[0].condition}}</text>
+                                    <text wx:for="{{productDetailData.units}}" wx:for-item="unit">
+                                        <text wx:if="{{unit.isBase}}">{{unit.unitName}}</text>
+                                    </text>,
+                                    在批发价基础上再打 <text class="num-color">{{item.rules[0].value/10}}</text>折
+                                </block>
+                                <block wx:if="{{!item.isLadder}}">
+                                    {{item.name}} 在批发价基础上再打<text class="num-color">{{item.rules[0].value/10}}</text>元
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="more-show">....</view>
+            </view>
+        </view>
+        <view class="clearfix"></view>
+        <!--choose size(多属性) start-->
+        <view class="choose-size" wx:if="{{productDetailData.isMultiProp}}">
+            <view bindtap="showProductDetailPopue" class="choose-size-btn">请选择颜色、尺码规格 <icon class="iconfont icon-leftarrow-copy"></icon></view>
+        </view>
+        <!--choose size(多属性) end-->
+        <!--tab begin-->
+        <view class="list-tab">
+            <ul>
+                <li class="{{current==0 ?'active':''}}" catchtap="switchSlider" data-index="0">图文详情</li>
+                <li class="{{current==1 ?'active':''}}" catchtap="switchSlider" data-index="1">商品参数</li>
+            </ul>
+        </view>
+        <view class="slider-box">
+            <view class="graphic-details" wx:if="{{isChangeSlider}}" current="0">
+                <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+            </view>
+            <view class="goods-param" wx:if="{{!isChangeSlider}}" current="1">
+                <ul class="basic">
+                    <li>
+                        <text class="name">名称</text>
+                        <text class="text">{{productDetailData.name}}</text>
+                    </li>
+                    <li>
+                        <text class="name">规格</text>
+                        <text class="text">{{productDetailData.standard}}</text>
+                    </li>
+                    <li>
+                        <text class="name">型号</text>
+                        <text class="text">{{productDetailData.typeName}}</text>
+                    </li>
+                    <li>
+                        <text class="name">产地</text>
+                        <text class="text">{{productDetailData.area}}</text>
+                    </li>
+                    <li>
+                        <text class="name">重量</text>
+                        <text class="text">{{productDetailData.weight}}</text>
+                    </li>
+                </ul>
+            </view>
+        </view>
+        <!--tab end-->
+        <!--相关商品 start-->
+        <view class="relevant-goods" wx:if="{{relevanceProductData.length>0}}">
+            <view class="weui-article__h1 title-name">相关商品</view>
+            <ul class="relevant-goods-list">
+                    <li wx:for="{{relevanceProductData}}" wx:for-item="product" bindtap="clickGoProductDetail" id="{{product.id}}" style="margin-right: {{index%2 ==0 ?'2%':''}}">
+                    <view class="goods-detail-img" style="background-image: url('{{product.picUrl}}')"></view>
+                    <view class="weui-article__p name">{{product.fullName}}</view>
+                    <view class="weui-article__p unit-num">{{product.howToShowStockQty}}</view>
+                    <view class="weui-article__p price">
+                        <text class="unit">￥</text>{{product.price}}
+                        <text class="unit-color"><text>/</text>{{product.unit}}</text>
+                    </view>
+                </li>
+            </ul>
+        </view>
+        <!--相关商品 end-->
+    </view>
+    <!--footer begin-->
+    <view class="weui-footer weui-footer_fixed-bottom action-bar">
+        <view class="weui-flex">
+            <view class="weui-flex__item">
+                <view class="button button-fill collect" bindtap="clickPopueCollect">
+                    <icon class="iconfont {{productDetailData.isCollected?'icon-star':'icon-star1'}}"></icon>
+                    <text wx:if="{{!productDetailData.isCollected}}">加入收藏</text>
+                    <text wx:if="{{productDetailData.isCollected}}">取消收藏</text>
+                </view>
+            </view>
+            <view class="weui-flex__item">
+                <view class="button button-fill add-to-cart" bindtap="showProductDetailPopue">
+                    <icon class="iconfont icon-gouwuche"></icon>
+                    加入购物车
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--footer end-->
+</view>

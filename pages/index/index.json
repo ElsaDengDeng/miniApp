@@ -1,0 +1,7 @@
+{
+  "usingComponents":{
+    "base-search-header": "/components/baseSearchHeader/baseSearchHeader",
+    "base-product-list": "/components/baseProductList/baseProductList",
+    "product-detail-popup":"/components/productDetailPopup/productDetailPopup"
+  }
+}

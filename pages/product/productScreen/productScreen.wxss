@@ -1,0 +1,111 @@
+/* pages/product/productScreen/productScreen.wxss */
+.screen-box{
+    background: #eee;
+}
+.goods-screen-label-box{
+    overflow: hidden;
+    margin-top: 12rpx;
+    margin-bottom: 26rpx;
+    background: #fafafa;
+    position: relative;
+}
+.screen-title{
+    font-size: 34rpx;
+    font-weight: bold;
+    height: 78rpx;
+    margin: 0;
+    text-align: center;
+    line-height: 78rpx;
+    color: #323232;
+    letter-spacing: 10rpx;
+    position: relative;
+    border-bottom: 1px solid #e0e0e0;
+}
+.goods-screen-label-box ul{
+    padding: 38rpx 26rpx 66rpx 46rpx;
+    overflow: hidden;
+    display: block;
+}
+.goods-screen-label-box ul li {
+    float: left;
+    font-size: 28rpx;
+    color: #656565;
+    padding: 10rpx 20rpx;
+    background: #eee;
+    border-radius: 4px;
+    margin: 0 20rpx 18rpx 0;
+}
+.goods-screen-price{
+    margin-top: 0;
+ }
+.goods-screen-price-wrap{
+    overflow: hidden;
+    position: relative;
+    margin: 34rpx 0 44rpx 0;
+}
+.goods-screen-price-input{
+    position: relative;
+    left: 17%;
+}
+.goods-screen-price-input input{
+    display: block;
+    width: 198rpx;
+    height: 52rpx;
+    border: 1px solid #e6e6e6;
+    border-radius: 0;
+    float: left;
+    font-size: 28rpx;
+    text-align: center;
+}
+.goods-screen-price-input i {
+    display: block;
+    position: relative;
+    width: 50rpx;
+    height: 1px;
+    margin: 26rpx 26rpx;
+    float: left;
+    background: #dcdcdc;
+    box-sizing: border-box;
+}
+.goods-screen-stock{
+    padding: 20rpx 26rpx 20rpx 46rpx;
+    float: left;
+    font-size: 28rpx;
+    color: #656565;
+    display: block;
+    line-height: 52rpx;
+    overflow: hidden;
+}
+.goods-screen-stock .iconfont{
+    color: #f65a44;
+    padding-right: 10rpx;
+    font-size: 36rpx;
+    vertical-align: baseline;
+}
+.goods-screen-btn-box{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 52rpx;
+    background: #eee;
+}
+.goods-screen-btn-box span{
+    display: block;
+    width: 60%;
+    height: 84rpx;
+    font-size: 34rpx;
+    border-radius: 4px;
+    line-height: 84rpx;
+    margin: 0 auto;
+    text-align: center;
+}
+.goods-screen-confirm-btn{
+    background: #f67129;
+    color: #fff;
+}
+.goods-screen-empty-btn{
+    background: #fff;
+    color: #f67129;
+    margin-top: 34rpx!important;
+    border: 1px solid #e3e3e3;
+}

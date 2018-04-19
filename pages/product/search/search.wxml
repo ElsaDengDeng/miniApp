@@ -1,0 +1,23 @@
+<view class="search-content">
+    <view class="base-header">
+        <view class="base-header-icon-box base-header-left-box" bindtap="myGobackFunction">
+            <icon class="iconfont icon-ico-left-arrow"></icon>
+        </view>
+        <view class="base-header-input-box">
+            <input type="text" class="weui-search-bar__input base-header-input" placeholder="商品名称/编号/条码" value="{{wxSearchData.value}}" bindinput="wxSearchInput" bindconfirm="wxSearchConfirm" />
+            <icon size="14" type="clear" class="weui-icon-clear" wx:if="{{wxSearchData.value.length>0}}" bindtap="wxSearchClear"></icon>
+        </view>
+        <view class="base-header-icon-box base-header-right-box" bindtap="wxSearchConfirm">
+            <span data-key='search'>搜索</span>
+        </view>
+    </view>
+    <view class="content">
+        <view class="search-history-box">
+            <span>搜索历史</span>
+            <ul>
+                <li wx:for="{{wxSearchData.his}}"  wx:key="key" bindtap="wxSearchKeyTap" data-key="{{item}}">{{item}}</li>
+            </ul>
+        </view>
+    </view>
+    <view class="search-footer" bindtap="wxSearchDeleteAll"><span>清空搜索历史</span></view>
+</view>

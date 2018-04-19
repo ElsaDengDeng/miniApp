@@ -1,0 +1,99 @@
+<view class="page">
+  <base-search-header showCategory="true" showCart="false"></base-search-header>
+  <view>
+    <!--banner start-->
+    <swiper indicator-dots="{{indicatorDots}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-dots="{{indicatorDots}}" indicator-color="indicatorColor" indicator-active-color="{{indicatorActiveColor}}">
+      <block wx:for="{{bannerNoticeData.bannerData}}" wx:key="key">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" height="150"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--banner end-->
+    <!--type-nav start-->
+    <view class="weui-flex type-nav-box">
+      <view class="weui-flex__item type-list-box">
+        <navigator url="/pages/product/product?isSalesPromotion=1&includeOOS=1">
+          <view class="type-list-top prom-icon">
+            <icon class="iconfont icon-icon6 type-icon"></icon>
+          </view>
+          <view>促销商品</view>
+        </navigator>
+      </view>
+      <view class="weui-flex__item type-list-box">
+        <navigator url="/pages/collection/collectionlist">
+          <view class="type-list-top coll-icon">
+            <icon class="iconfont icon-star type-icon"></icon>
+          </view>
+          <view>收藏商品</view>
+        </navigator>
+      </view>
+      <view class="weui-flex__item type-list-box">
+        <navigator url="/pages/mine/BoughtProduct">
+          <view class="type-list-top boug-icon">
+            <icon class="iconfont icon-wenjianjia type-icon"></icon>
+          </view>
+          <view>最近订购</view>
+        </navigator>
+      </view>
+      <view class="weui-flex__item type-list-box">
+        <navigator url="/pages/product/product?includeOOS=1">
+          <view class="type-list-top all-icon">
+            <icon class="iconfont icon-all type-icon"></icon>
+          </view>
+          <view>全部商品</view>
+        </navigator>
+      </view>
+    </view>
+    <!--type-nav end-->
+    <!--notice begin-->
+    <view class="notice-box" wx:if="bannerNoticeData.noticeData.length>0">
+      <icon class="iconfont icon-iconxx2"></icon>
+      <view id="js_text">
+        <view wx:for="{{bannerNoticeData.noticeData}}" wx:key="key" wx:for-item="notice" id="{{notice.id}}" bindtap="clickNoticeItem" style="margin-top: {{notice.marginTop}}">
+          <text class="notice-icon-text">【最新公告】</text>
+          <text class="notice-content">{{notice.name}}</text>
+        </view>
+      </view>
+    </view>
+    <!--notice end-->
+    <!--goods begin-->
+    <view class="goods-box">
+      <view class="good-title-box">
+        <text>{{bannerNoticeData.goodsLabelData.recommendLabel}}</text>
+        <navigator url="/pages/product/product?isRecommend=1&includeOOS=1&label={{bannerNoticeData.goodsLabelData.recommendLabel}}" hover-class="none" class="all-goods">更多 <icon class="iconfont icon-leftarrow-copy"></icon></navigator>
+      </view>
+      <base-product-list showBigProductList="true" marginTop="0" bind:myevent="onMyEvent" list-data="{{productRecommendData}}"></base-product-list>
+    </view>
+    <!--goods end-->
+    <!--new begin-->
+    <view class="goods-box">
+      <view class="good-title-box">
+        <text>{{bannerNoticeData.goodsLabelData.newsLabel}}</text>
+        <navigator url="/pages/product/product?isNew=1&includeOOS=1&label={{bannerNoticeData.goodsLabelData.newsLabel}}" class="all-goods">更多 <icon class="iconfont icon-leftarrow-copy"></icon></navigator>
+      </view>
+      <base-product-list showBigProductList="true" marginTop="0" bind:myevent="onMyEvent" list-data="{{productNewData}}"></base-product-list>
+    </view>
+    <!--new end-->
+    <!--promotion start-->
+    <view class="goods-box">
+      <view class="good-title-box">
+        <text>{{bannerNoticeData.goodsLabelData.promotionLabel}}</text>
+        <navigator url="/pages/product/product?isPromotion=1&includeOOS=1&label={{bannerNoticeData.goodsLabelData.promotionLabel}}" class="all-goods">更多 <icon class="iconfont icon-leftarrow-copy"></icon></navigator>
+      </view>
+      <base-product-list showBigProductList="true" marginTop="0" bind:myevent="onMyEvent" list-data="{{productPromotionData}}"></base-product-list>
+    </view>
+    <!--promotion start-->
+    <!--hot start-->
+    <view class="goods-box">
+      <view class="good-title-box">
+        <text>{{bannerNoticeData.goodsLabelData.hotLabel}}</text>
+        <navigator url="/pages/product/product?isHot=1&includeOOS=1&label={{bannerNoticeData.goodsLabelData.hotLabel}}" class="all-goods">更多 <icon class="iconfont icon-leftarrow-copy"></icon></navigator>
+      </view>
+      <base-product-list showBigProductList="true" marginTop="0" list-data="{{productHotData}}"></base-product-list>
+    </view>
+    <!--hot end-->
+  </view>
+  <product-detail-popup list-data="{{productDetailData}}"></product-detail-popup>
+</view>

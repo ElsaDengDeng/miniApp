@@ -1,0 +1,38 @@
+<!--pages/product/productScreen/productScreen.wxml-->
+<view class="screen-box">
+    <base-header title="商品筛选" canBack="true"></base-header>
+    <view class="content">
+        <view class="goods-screen-label-box">
+            <view class="screen-title">标签</view>
+            <ul>
+                <li wx:for="{{goodsLabel}}" class="{{item.active?'active':''}}" bindtap="clickToggleClass">{{item.text}}</li>
+            </ul>
+        </view>
+        <view class="goods-screen-label-box goods-screen-price">
+            <view class="screen-title">价格</view>
+            <view class="goods-screen-price-wrap">
+                <view class="goods-screen-price-input">
+                    <input type="text" bindinput="bindMinPrice" bind:keydown="checkKeyDownUserInput" bind:change="checkChangeUserInput"/>
+                    <i></i>
+                    <input type="text" bindinput="bindMaxPrice" bind:keydown="checkKeyDownUserInput" bind:change="checkChangeUserInput" />
+                </view>
+            </view>
+        </view>
+        <view class="goods-screen-label-box goods-screen-price">
+            <view class="screen-title">品牌</view>
+            <ul class="brand-ul">
+                <li wx:for="{{screenData}}" bindtap="clickToggleClass" class="{{item.active?'active':''}}">{{item.name}}</li>
+            </ul>
+        </view>
+        <view class="goods-screen-label-box goods-screen-price">
+            <span class="goods-screen-stock" bindtap="showIncludeOOS">
+                <icon class="iconfont {{includeOOS?'icon-xuanzhong':'icon-weixuanzhong'}}"></icon>
+                不显示缺货
+            </span>
+        </view>
+        <view class="goods-screen-btn-box">
+            <span bindtap="clickGoProduct" class="goods-screen-confirm-btn">确定</span>
+            <span bindtap="clickEmptyScreen" class="goods-screen-empty-btn">清空筛选条件</span>
+        </view>
+    </view>
+</view>

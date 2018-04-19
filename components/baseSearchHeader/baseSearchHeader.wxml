@@ -1,0 +1,21 @@
+<view class="base-header">
+    <view class="base-header-icon-box base-header-left-box">
+        <icon class="iconfont icon-ico-left-arrow" hidden="{{!showBack}}" bindtap="goBack"></icon>
+        <icon class="iconfont icon-sort" hidden="{{!showCategory}}" bindtap="showCategory"></icon>
+    </view>
+    <view class="base-header-input-box">
+        <icon class="iconfont icon-search"></icon>
+        <input disabled="true" class="base-header-input" type="text" placeholder="{{isShowScreen?'':'商品名称/编号/条码'}}" bindtap="wxSearchTab"/>
+        <view class="base-header-screen" wx:if="{{isShowScreen}}">
+            <span class="screen-text" wx:for="{{screenText}}" wx:key="key" wx:for-item="text">{{text}}</span>
+        </view>
+        <icon hidden="{{showCart}}" class="iconfont icon-richscan_icon" bindtap="doScan"></icon>
+    </view>
+    <view class="base-header-icon-box base-header-right-box">
+        <icon hidden="{{showCart}}" class="iconfont icon-richscan_icon" bindtap="doScan"></icon>
+        <navigator url="/pages/cart/cart" hover-class="none" hidden="{{!showCart}}">
+            <icon class="iconfont icon-gouwuche bar-gouwuche"></icon>
+            <view wx:if="{{cartCount>0}}" class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">{{cartCount}}</view>
+        </navigator>
+    </view>
+</view>

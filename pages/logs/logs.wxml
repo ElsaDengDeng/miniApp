@@ -1,0 +1,29 @@
+<view class="page login-content">
+    <view class="login-header">
+        <view class="title">{{title}}</view>
+        <view class="sub-title">{{subtitle}}</view>
+    </view>
+    <view wx:if="{{isAutoLogin}}" class="content-block" style="text-align:center;">正在获取微信授权...</view>
+    <view class="weui-cells login-content" wx:if="{{!isAutoLogin}}">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <icon class="weui-label iconfont icon-user"></icon>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="请输入登录账号" type="text" bindinput='bindloginname'></input>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <icon class="weui-label iconfont icon-password"></icon>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="请输入登录密码" type="password" bindinput='bindpassword'></input>
+            </view>
+        </view>
+    </view>
+    <view class="submit-content">
+        <view class="weui-btn submit-btn" bindtap='doLogin'>登录</view>
+    </view>
+</view>
+

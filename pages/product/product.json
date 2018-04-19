@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents":{
+    "base-search-header": "/components/baseSearchHeader/baseSearchHeader",
+    "base-product-nav": "/components/baseProductNav/baseProductNav",
+    "base-product-list": "/components/baseProductList/baseProductList"
+  }
+}

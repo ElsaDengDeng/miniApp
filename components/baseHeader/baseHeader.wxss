@@ -1,0 +1,28 @@
+/* components/baseHeader/baseHeader.wxss */
+@import "../../static/img/font/iconfont.wxss";
+.base-header-box{
+    background: #F65A44;
+    z-index: 10;
+    height: 116rpx;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    font-size: 44rpx;
+    color: #fff;
+}
+.button-link{
+    flex: 0 0 116rpx;
+    width: 116rpx;
+    height: 116rpx;
+    line-height: 116rpx;
+    text-align: center;
+    font-size: 38rpx;
+}
+.iconfont{
+    font-size: 38rpx;
+}
+.base-header-title{
+    flex: 1;
+}

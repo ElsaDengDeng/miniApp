@@ -1,0 +1,48 @@
+<view style="margin-top: {{marginTop}}rpx;">
+    <view class="big-goods-detail-container">
+        <view class="big-goods-detail-box" wx:if="{{showBigProductList}}" wx:for="{{listData}}" wx:key="key" wx:for-index="index" style="margin-right: {{index%2 ==0 ?'2%':''}}" id="{{item.id}}"  bindtap="clickProductList">
+            <view class="goods-detail-img" style="background-image: url('{{item.picUrl}}');"></view>
+            <view class="msg-box">
+                <view class="new-goods-text">
+                    <view class="sales-icon" wx:if="{{item.isSalesPromotion}}">促销</view>
+                    <view class="special {{item.isSalesPromotion?'addTextIndent':''}}">{{item.fullName}}</view>
+                </view>
+                <view class="goods-detail-msg">
+                    <text>库存：{{item.howToShowStockQty}}</text>
+                </view>
+                <view class="goods-detail-price">
+                    ¥
+                    <text class="price-size">{{item.price}}</text>
+                    <text class="unit-color"><text>/</text>{{item.unit}}</text>
+                    <view class="buy-btn" bindtap="clickBuyProduct" id="{{item.id}}">
+                        <icon class="iconfont icon-gouwuche price-icon open-about"></icon>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="goods-list-box" wx:if="{{!showBigProductList}}" wx:for="{{listData}}" wx:key="key" id="{{item.id}}" bindtap="clickProductList">
+        <view class="goods-detail-box">
+            <view class="goods-img-box">
+                <image class="goods-img" src="{{item.picUrl}}"></image>
+            </view>
+            <view class="goods-param-box">
+                <span class="text-pre">
+                    <span class="new-goods-text">
+                        <span class="sales-icon clear-position" wx:if="{{item.isSalesPromotion}}">促销</span><span>{{item.fullName}}</span></span>
+                </span>
+                <view class="text-pre text-padding" wx:if="{{item.properties}}">{{item.properties}}</view>
+                <view class="text-pre text-padding" wx:if="{{showStockQty!=0}}">
+                    库存：{{item.howToShowStockQty}}
+                </view>
+                <view class="text-pre">
+                    <span class="price-color text-padding-right">¥<span class="price-size">{{item.price}}</span><span><span>/</span>{{item.unit}}</span></span>
+                    <span class="buy-btn" bindtap="clickBuyProduct" id="{{item.id}}" skuId="{{item.skuId}}">
+                    <icon class="iconfont icon-gouwuche buy-icon open-about"></icon>
+                </span>
+                </view>
+            </view>
+        </view>
+
+    </view>
+</view>

@@ -1,0 +1,37 @@
+@import "../../static/style/weui.wxss";
+@import "../../static/img/font/iconfont.wxss";
+
+.nav-box{
+    text-align: center;
+    font-size: 30rpx;
+    height: 66rpx;
+    line-height: 66rpx;
+    color: #2b2b2b;
+    border-bottom: 1px solid #f0f0f0;
+}
+.nav-icon-sort{
+    border-right: 1px solid #f0f0f0;
+}
+.nav-icon-filter{
+    border-left: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+}
+.iconfont{
+    font-size: 38rpx;
+}
+.icon-sortup, .icon-sortdown{
+    font-size: 30rpx;
+    margin-top: -4rpx;
+    position: absolute;
+    right: 50%;
+    margin-right: -63rpx;
+}
+.icon-sortdown{
+  padding-top: 5rpx;
+}
+.no-active{
+    color: #2b2b2b;
+}
+.active{
+   color: #f65a44;
+}

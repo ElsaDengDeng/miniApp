@@ -1,0 +1,10 @@
+<!--components/baseHeader/baseHeader.wxml-->
+<view class="base-header-box">
+    <view wx:if="{{canBack}}" bindtap="onBack" class="button-link pull-left">
+        <icon class="iconfont icon-ico-left-arrow"></icon>
+    </view>
+    <view class="base-header-title">
+        {{title}}
+    </view>
+    <view wx:if="{{!rightShow}}" class="button-link pull-right" bindtap="onRightClick">{{rightMsg}}</view>
+</view>

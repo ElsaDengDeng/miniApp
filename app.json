@@ -1,0 +1,67 @@
+{
+  "pages": [
+  
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/cart/cart",
+    "pages/order/order",
+    "pages/mine/mine",
+    "pages/message/message",
+    "pages/message/noticeDetail/noticeDetail",
+    "pages/message/noticeMessage/noticeMessage",
+    "pages/message/orderMessage/orderMessage",
+    "pages/message/promotionMessage/promotionMessage",
+    "pages/product/product",
+    "pages/product/search/search",
+    "pages/product/productDetail/productDetail",
+    "pages/product/productClass/productClass",
+    "pages/product/productScreen/productScreen"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "章鱼侠云订货",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": "50",
+    "backgroundColor": "#f65a44"
+  },
+  "tabBar": {
+    "color": "#3d4145",
+    "selectedColor": "#f65a44",
+    "backgroundColor": "#fafafa",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "商品",
+        "iconPath": "static/img/iconPath/shopping.png",
+        "selectedIconPath": "static/img/selectedIconPath/shopping.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "static/img/iconPath/gouwuche.png",
+        "selectedIconPath": "static/img/selectedIconPath/gouwuche.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单",
+        "iconPath": "static/img/iconPath/wodedingdan.png",
+        "selectedIconPath": "static/img/selectedIconPath/wodedingdan.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息",
+        "iconPath": "static/img/iconPath/xiaoxizhongxin.png",
+        "selectedIconPath": "static/img/selectedIconPath/xiaoxizhongxin.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "static/img/iconPath/geren.png",
+        "selectedIconPath": "static/img/selectedIconPath/geren.png"
+      }
+    ]
+  }
+}

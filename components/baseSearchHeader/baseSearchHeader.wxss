@@ -1,0 +1,63 @@
+/* components/baseSearchHeader.wxss */
+@import "../../static/style/weui.wxss";
+@import "../../static/img/font/iconfont.wxss";
+
+.base-header{
+    background: #f65a44!important;
+    padding: 0;
+    height: 116rpx;
+    display: flex;
+}
+.base-header-icon-box{
+    flex: 0 0 116rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 116rpx;
+}
+.iconfont{
+    font-size: 52rpx;
+    color: #fff;
+}
+.base-header-input-box{
+    flex: 1;
+    position: relative;
+    top: 26rpx;
+    height: 70rpx;
+    color: #909090;
+    background: #fff;
+    font-size: 28rpx;
+}
+.icon-richscan_icon{
+    position: absolute;
+    top: 4rpx;
+    right: 10rpx;
+    color: #909090;
+    font-size: 38rpx;
+}
+.icon-search{
+    position: absolute;
+    color: #909090;
+    font-size: 28rpx;
+    left: 18rpx;
+    top: 4rpx;
+}
+.base-header-input{
+    position: relative;
+    left: 58rpx;
+    top: 12rpx;
+}
+.base-header-screen{
+    position: absolute;
+    z-index: 100;
+    height: 100%;
+    top: 0;
+    left: 14rpx;
+    line-height: 70rpx;
+}
+.screen-text{
+    background: #fe7f6d;
+    color: #fff;
+    padding: 6rpx 20rpx;
+    border-radius: 10rpx;
+    margin-right: 10rpx;
+}

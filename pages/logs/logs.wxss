@@ -1,0 +1,60 @@
+.login-content{
+    background: #fff;
+    font-size: 14px;
+}
+.login-header{
+    margin-top: 2.75rem;
+    text-align: center;
+}
+.login-header .title{
+    font-size: 1.35rem;
+    color: #F65A44;
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0.2rem;
+    font-weight: normal;
+    margin-top: 0;
+}
+.login-header .sub-title{
+    font-size: 0.75rem;
+    color: #F65A44;
+    text-align: center;
+    font-weight: normal;
+    margin: 0;
+}
+
+.weui-cells:before{
+    border-top: none;
+}
+.weui-cell:before{
+    border-top: none;
+}
+.login-content{
+    border: none;
+    margin: 100rpx  60rpx 0 60rpx;
+}
+.login-content .weui-cell{
+    border-bottom: 2px solid #E1E1E1;
+    padding: 0;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+.login-content .weui-label{
+    width: 80rpx;
+}
+.login-content icon{
+    font-size: 36rpx;
+    color: #cccccc;
+}
+.submit-content{
+    margin: 100rpx 60rpx;
+    color: #ffffff;
+    font-size: 36rpx;
+    text-align: center;
+}
+.submit-content .submit-btn{
+    height: 82rpx;
+    line-height: 82rpx;
+    background-color: #F65A44;
+    border-radius: 8rpx;
+}

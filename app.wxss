@@ -1,0 +1,12 @@
+/**app.wxss**/
+@import "static/style/weui.wxss";
+@import "static/img/font/iconfont.wxss";
+/* @import  */
+
+.page{
+    font-size: 34rpx;
+    font-family: Helvetica Neue,Helvetica,sans-serif;
+    color: #3d4145;
+    background: #eee;
+    overflow: hidden;
+}

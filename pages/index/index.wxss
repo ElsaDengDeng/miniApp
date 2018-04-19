@@ -1,0 +1,94 @@
+.page{
+    background: #eeeeee;
+    position: relative;
+    font-size: 28rpx;
+}
+.slide-image{
+    width: 750rpx;
+}
+
+.type-nav-box{
+    height: 120rpx;
+    background-color: #fff;
+    padding: 5px 0;
+    /*border-bottom: 1px solid #cecece;*/
+}
+.type-list-box{
+   text-align: center;
+}
+.type-list-top{
+    width: 80rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 50%;
+    text-align: center;
+    margin: 0 auto;
+}
+.prom-icon{
+    background: #f5740e;
+}
+.coll-icon{
+    background: #80cd40;
+}
+.boug-icon{
+    background: #fdbd35;
+}
+.all-icon{
+    background: #53adff;
+}
+.type-list-top .type-icon{
+    font-size: 40rpx;
+    color: #fff;
+}
+.notice-box{
+    height: 64rpx;
+    line-height: 64rpx;
+    background: #fff;
+    padding: 0 26rpx;
+    color: grey;
+    margin-bottom: 20rpx;
+}
+.icon-iconxx2{
+    color: #f65a44;
+    position: absolute;
+    display: block;
+    left: 26rpx;
+}
+#js_text{
+    height: 64rpx;
+    position: relative;
+    padding-left: 28rpx;
+}
+.notice-icon-text{
+    color: #474747;
+    display: block;
+    float: left;
+}
+.notice-content{
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.goods-box{
+    background: #fff;
+}
+.good-title-box{
+    padding: 0 26rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #f65a44;
+    display: flex;
+    justify-content: space-between;
+}
+.all-goods{
+    position: absolute;
+    right: 26rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    color: #7b7b7b;
+
+}
+.all-goods .icon-leftarrow-copy{
+    vertical-align: baseline;
+}
