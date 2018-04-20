@@ -12,11 +12,6 @@
     console.log('request url:' + url);
     console.log('request data:' + JSON.stringify(reqdata));
   }
-  // wx.showToast({
-  //   title: '加载中',
-  //   icon: 'loading',
-  //   duration: 10000
-  // });
   wx.request({
       url: url,
       data: {
@@ -26,9 +21,6 @@
         'content-type': 'application/json'
       },
       success:res=>{
-        setTimeout(()=>{
-          wx.hideLoading()
-        },1000);
         if(appconfig.isdebug) {
             console.log('response data:' + JSON.stringify(res.data))
         }

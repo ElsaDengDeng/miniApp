@@ -22,7 +22,12 @@ Component({
    */
   methods: {
     doChangeList: function () {
-      this.triggerEvent('changeBigProduct',this.data.showBigProductList)
+      this.data.showBigProductList=!this.data.showBigProductList
+      this.setData({
+        'showBigProductList':this.data.showBigProductList
+      })
+      var detail = {showBigProductList: this.data.showBigProductList}
+        this.triggerEvent('changeBigProduct', detail)
     },
     clickChangeNav: function (e) {
       var state = e.currentTarget.dataset.state;
@@ -50,7 +55,7 @@ Component({
       }
     },
     doNavReq: function (id) {
-      var detail = {orderSelect:id,needLoader:true,isOrderSelect:true}
+      var detail = {orderSelect:id}
       this.triggerEvent('doNavReq',detail)
     },
     clickGoProductScreen: function () {

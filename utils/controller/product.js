@@ -73,27 +73,29 @@ function getIndexProductList(sender, data, callback, failback, bizError) {
   });
 }
 //商品列表
-function getProductList(sender, data, pageSize, pageIndex, needLoader, callback) {
+function getProductList(sender, data, pageSize, pageIndex, callback) {
   let initData = {};
-  if (data.classId) initData.classId = data.classId;
-  if (data.isSalesPromotion) initData.isSalesPromotion = parseInt(data.isSalesPromotion);
-  if (data.isNew) initData.isNew = parseInt(data.isNew);
-  if (data.isHot) initData.isHot = parseInt(data.isHot);
-  if (data.isPromotion) initData.isPromotion = parseInt(data.isPromotion);
-  if (data.isRecommend) initData.isRecommend = parseInt(data.isRecommend);
-  if (data.keyWord) initData.keyWord = data.keyWord;
-  if (data.brandId) initData.brandId = data.brandId;
-  if (data.minPrice) initData.minPrice = data.minPrice;
-  if (data.maxPrice) initData.maxPrice = data.maxPrice;
-  if (data.includeOOS) initData.includeOOS = data.includeOOS;
-  if (data.orderSelect) initData.orderSelect = parseInt(data.orderSelect);
+  if (data) {
+    if (data.classId) initData.classId = data.classId;
+    if (data.isSalesPromotion) initData.isSalesPromotion = parseInt(data.isSalesPromotion);
+    if (data.isNew) initData.isNew = parseInt(data.isNew);
+    if (data.isHot) initData.isHot = parseInt(data.isHot);
+    if (data.isPromotion) initData.isPromotion = parseInt(data.isPromotion);
+    if (data.isRecommend) initData.isRecommend = parseInt(data.isRecommend);
+    if (data.keyWord) initData.keyWord = data.keyWord;
+    if (data.brandId) initData.brandId = data.brandId;
+    if (data.minPrice) initData.minPrice = data.minPrice;
+    if (data.maxPrice) initData.maxPrice = data.maxPrice;
+    if (data.includeOOS) initData.includeOOS = data.includeOOS;
+    if (data.orderSelect) initData.orderSelect = parseInt(data.orderSelect);
+  }
   initData.pageSize = pageSize;
   initData.pageIndex = pageIndex;
   lib.http.post(sender, productApi.getApiConfig().productlist, initData, (result) => {
     let msg = this.howToShowStockQty(result.data);
     this.dealNullImg(msg);
-    callback(msg, result.pageCount);
-  }, null, null, needLoader);
+    callback(msg);
+  }, null, null, true);
 }
 // 获取组合促销data
 function getCombinePromotion(sender, callback) {

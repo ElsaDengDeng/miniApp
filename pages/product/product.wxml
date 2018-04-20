@@ -2,12 +2,10 @@
 <view>
     <base-search-header show-cart="true" show-back="true" showScreen="{{queryData}}"></base-search-header>
     <!--nav begin-->
-    <base-product-nav showBigProductList="showBigProductList" bind:doNavReq="doInitPage"></base-product-nav>
+    <base-product-nav bind:changeBigProduct="changeBigProduct" show-big-productList="showBigProductList" bind:doNavReq="doInitPage"></base-product-nav>
     <!--nav end-->
     <!--product list-->
-    <base-product-list showBigProductList="showBigProductList" list-data="{{productData}}"></base-product-list>
+    <span>{{showBigProductList}}</span>
+    <base-product-list show-big-productList="showBigProductList" list-data="{{productData}}"></base-product-list>
     <!--product list-->
-    <view class="refresh-block" wx:if="{{loading}}">
-        <image animation="{{refreshAnimation}}" src="../../resources/refresh.png"></image>
-    </view>
 </view>

@@ -7,8 +7,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    showBigProductList: Boolean,
     marginTop: Number,
+    // showBigProductList: Boolean,
     listData: {
       type: Array,
       value: []
@@ -22,7 +22,9 @@ Component({
     imgHeight: '',
     showStockQty: storage.getShowStockQty()
   },
-
+  ready:function () {
+    console.log(this.data.showBigProductList)
+  },
   /**
    * 组件的方法列表
    */
