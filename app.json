@@ -1,8 +1,8 @@
 {
   "pages": [
-  
+    
     "pages/index/index",
-    "pages/logs/logs",
+    "pages/login/login",
     "pages/cart/cart",
     "pages/order/order",
     "pages/mine/mine",
@@ -20,7 +20,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "章鱼侠云订货",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true,
     "onReachBottomDistance": "50",

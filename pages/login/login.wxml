@@ -1,0 +1,24 @@
+<!--pages/login/login.wxml-->
+<view class="login-content">
+    <view class="login-header">
+        <view class="title">{{title}}</view>
+        <view class="subtitle">{{subTitle}}</view>
+    </view>
+    <view class="login-form">
+        <form wx:if="{{!isAutoLogin}}" action="">
+            <ul>
+                <li>
+                    <icon class="iconfont icon-user"></icon>
+                    <input type="text" bindinput="bindusername" value="dxm003" placeholder='请输入登录账号' />
+                </li>
+                <li>
+                    <icon class="iconfont icon-password"></icon>
+                    <input type="password" bindinput="bindpassword" value="dxm003" placeholder='请输入登录密码'/>
+                </li>
+            </ul>
+            <view class="login-btn">
+                <button bindtap="doLogin">登录</button>
+            </view>
+        </form>
+    </view>
+</view>

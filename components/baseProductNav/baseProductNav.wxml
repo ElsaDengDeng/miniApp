@@ -26,5 +26,4 @@
             <icon class="iconfont {{showBigProductList?'icon-202':'icon-apps'}}"></icon>
         </view>
     </view>
-
 </view>

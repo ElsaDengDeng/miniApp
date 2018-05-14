@@ -7,8 +7,17 @@ const picUrl = '../../static/img/default.png';
 function getBannerNotice(sender, data, callback, failback, bizError) {
   lib.http.post(sender, productApi.getApiConfig().bannerNotice, data, (result) => {
     if(result.banner.length === 0) {
-      result.banner[0] = require('../../static/img/index_banner_1.jpg');
-      result.banner[0] = require('../../static/img/index_banner_2.jpg');
+      result.banner[0]={}
+      result.banner[1]={}
+      result.banner[0].picPath = require('../../static/img/index_banner_1.jpg');
+      result.banner[1].picPath = require('../../static/img/index_banner_2.jpg');
+      result.banner[0].mobileUrl ='javascript:void(0)'
+      result.banner[1].mobileUrl ='javascript:void(0)'
+    } else {
+      for (let i=0; i<result.banner.length; i++) {
+        result.banner[i].mobileUrl=result.banner[i].mobileUrl?
+          result.banner[i].mobileUrl:'javascript:void(0)'
+      }
     }
     for(let i = 0; i<result.notice.length; i++) {
       result.notice[i].marginTop = 0;
@@ -126,6 +135,7 @@ function getProductDetail(sender, data, callback, skuId) {
     //如果skuid为0,订过商品单属性设置默认购买数量为1
     if (skuId == 0 && !msg.isMultiProp && msg.stockQty > 0) {
       msg.setNoMultiPropUserInput = true;
+      console.log(msg)
     }
 
     if(msg.skus.length>=1){
@@ -219,10 +229,12 @@ function getProductDetail(sender, data, callback, skuId) {
 
     if(stockOutArray.length > 0){
       msg.selectedUnitName = stockOutArray[0].unitName;
+      msg.selectedUnitId = stockOutArray[0].unitId
       msg.marketPrice = stockOutArray[0].marketPrice;
       msg.tradePrice = stockOutArray[0].tradePrice;
     }else{
       msg.selectedUnitName = msg.initUnitBase.unitName;
+      msg.selectedUnitId = msg.initUnitBase.unitId;
       msg.marketPrice = msg.initUnitBase.marketPrice;
       msg.tradePrice = msg.initUnitBase.tradePrice;
     }

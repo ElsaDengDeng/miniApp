@@ -1,2 +1,26 @@
 <!--pages/product/productClass/productClass.wxml-->
-<text>pages/product/productClass/productClass.wxml</text>
+<view>
+    <base-header title="商品分类" canBack="true"></base-header>
+    <view class="content">
+        <view class="goods-class-left">
+            <block wx:for="{{firstLevelClassData}}" wx:key="key">
+                <!--当前项的id等于item项的id,就是当前的状态-->
+                <!--用data-index记录这个数据在数组的下标位置,使用data-id设置没有item的id值,打开2级页面使用-->
+                <view class="goods-class-items {{item.active?'active':''}}" bindtap="clickFirstLevelClass" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+            </block>
+        </view>
+        <view class="goods-class-right" wx:for="{{firstLevelClassData}}" wx:key="key"  wx:if="{{item.active}}">
+            <view class="goods-class-tab" wx:for="{{item.data}}" wx:for-item="other" wx:key="key" wx:if="{{!item.isEnd}}">
+                <span bindtap="clickGoProduct" data-class-id="{{other.id}}" data-class-name="{{other.name}}" style="padding-top: {{index==0?'36':''}}rpx;">{{other.name}}</span>
+                <ul>
+                    <li wx:for="{{other.subClass}}" wx:for-item="list" wx:key="key" bindtap="clickGoProduct" data-class-id="{{list.id}}" data-class-name="{{list.name}}">{{list.name}}</li>
+                </ul>
+            </view>
+            <view class="goods-class-no-more" wx:if="{{item.isEnd}}">
+                <icon class="iconfont icon-salefill"></icon>
+                <span>暂无更多分类,去看看别的吧</span>
+            </view>
+        </view>
+
+    </view>
+</view>

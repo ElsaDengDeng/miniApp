@@ -20,7 +20,7 @@ function isShowStockQty() {
   if (func.strIsNullOrEmpty(showStockQty)) {
     return false;
   }
-  return showStockQty === 'true';
+  return showStockQty = true;
 }
 
 function getShowStockQty() {
@@ -33,10 +33,7 @@ function setShowStockQty(value) {
 
 function isAllowExceedStock() {
   var allowExceedStock = auth.getStorageSync("allowExceedStock");
-  if(func.strIsNullOrEmpty(allowExceedStock)) {
-    return false;
-  }
-  return allowExceedStock === 'true';
+  return allowExceedStock
 }
 
 function setAllowExceedStock(value) {

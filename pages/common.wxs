@@ -1,0 +1,55 @@
+var filterCommon = {
+  // 价格过滤器
+  formatPrice: function (price) {
+    var value = price;
+    if (value == undefined)
+      value = 0;
+
+    var arr = value.toString().split('.');
+    if (arr.length <= 1)
+      return value.toFixed(2);
+     else
+      if (arr[1].length > 2) {
+        return parseFloat(value.toFixed(6))
+      } else {
+        return value.toFixed(2);
+      }
+  },
+  // 数量过滤器
+  formatQty: function (qty) {
+    var value = qty;
+    if (value == undefined)
+      value = 0
+
+    return parseFloat(value.toFixed(4))
+  },
+  // 购物车显示数量
+  formatCartQty: function (qty) {
+    var value  = qty;
+    if (value == undefined)
+      value = 0;
+
+    if (value > 99)
+      return '..';
+
+    return Math.ceil(value)
+  },
+  // 总金额过滤器
+  formatTotal: function (total) {
+    var value = total;
+    if (value == undefined)
+      value = 0;
+    return value.toFixed(2)
+  },
+  // 过滤条件
+  comFilter: function (obj) {
+
+  }
+}
+
+module.exports = {
+  formatPrice: filterCommon.formatPrice,
+  formatQty: filterCommon.formatQty,
+  formatCartQty: filterCommon.formatCartQty,
+  formatTotal: filterCommon.formatTotal
+}

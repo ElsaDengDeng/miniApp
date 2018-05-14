@@ -1,2 +1,178 @@
-<!--components/productDetailPopup/productDetailPopup.wxml-->
-<text>components/productDetailPopup/productDetailPopup.wxml</text>
+<wxs module="filter" src="../../pages/common.wxs"></wxs>
+<view class="popup popup-content" wx:if="{{productDetailData!==undefined}}" flag="1">
+    <view class="product-detail-content">
+        <view class="flex-0 basic-info">
+            <view class="img-item">
+                <image src="{{productDetailData.picUrl}}"></image>
+            </view>
+            <view class="basic-content-item">
+                <view class="basic-name">{{productDetailData.fullName}}</view>
+                <view class="basic-number">
+                    <span class="unit" wx:if="{{productDetailData.minQty}}">起订量：{{productDetailData.minQty}}{{productDetailData.unit}}</span>
+                    <span class="unit" wx:if="{{productDetailData.limitQty>0}}">限购量：{{productDetailData.limitQty}}{{productDetailData.unit}}</span>
+                    <span class="number" wx:if="{{showStockQty!=0}}">库存：{{productDetailData.howToShowStockQty}}</span>
+                </view>
+                <view class="basic-price">
+                    <span class="color">批发价：</span>
+                    <span class="unit-icon">¥</span>
+                    {{filter.formatPrice(unitRateTradePrice)}}
+                    <span class="color market-price">市场价：¥{{filter.formatPrice(unitRateMarketPrice)}}</span>
+                </view>
+            </view>
+            <icon class="iconfont icon-delete" bindtap="closePopup"></icon>
+        </view>
+        <view class="flex-1 choose-items border-bottom" style="overflow: auto">
+            <view class="order-number-unit border-bottom">
+                <view class="unit-select">
+                    <view class="batch-btn h80" bindtap="clickBatchBtn" wx:if="{{productDetailData.isMultiProp}}">
+                        <icon class="iconfont {{productDetailData.isBatchChoose?'icon-xuanzhong':'icon-weixuanzhong'}}"></icon>
+                        整批购买
+                    </view>
+                    <view class="unit-content">
+                        <view>单位：</view>
+                        <view class="unit-chunk {{unit.unitId===productDetailData.selectedUnitId?'active':''}}" wx:for="{{productDetailData.units}}" wx:for-item="unit" wx:key="key" wx:if="{{unit.isEnable}}" data-unit="{{unit}}" bindtap="changeUnit">
+                            <span>{{unit.unitName}}</span>
+                            <span wx:if="{{unit.rate>1}}">({{unit.rate}}{{productDetailData.unit}})</span>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!--单属性-->
+            <view class="choose-single" wx:if="{{!productDetailData.isMultiProp}}">
+                <view class="stock-num" wx:if="{{showStockQty!=0}}">库存：{{productDetailData.howToShowStockQty}}</view>
+                <view class="stock-edit-content">
+                    <span class="text">数量：</span>
+                    <view class="num-edit">
+                        <span class="desc {{userInput < 1 || productDetailData.stockQty == 0?'unable':''}}" bindtap="clickInventoryNum" data-type="desc" data-user-input="{{userInput}}"><icon class="iconfont icon-plus-minus"></icon></span>
+                        <input type="number"
+                               class="num-input {{!isAllowExceedStock && productDetailData.stockQty == 0?'disabled':''}}"
+                               bind:input="bindInput" value="{{userInput}}"
+                               bind:change="checkUserInput" data-obj="{{productDetailData}}"
+                               bind:keydown="keydownCheckQty"
+                               bind:keyup="keyupUserInput"
+                               />
+                        <span class="add {{productDetailData.stockQty == 0 || userInput > (productDetailData.stockQty-1)/computedUnitRate?'unable':''}}" bindtap="clickInventoryNum" data-type="add" data-user-input="{{userInput}}"><icon class="iconfont icon-add"></icon></span>
+                    </view>
+                </view>
+            </view>
+            <!--单属性-->
+            <!--多属性-->
+            <view class="choose-size" wx:if="{{productDetailData.isMultiProp}}">
+                <view class="details-size">
+                    <view class="choose-color border-bottom">
+                        <view>{{productDetailData.property1}}: </view>
+                        <view class="unit-chunk {{type.active?'active':''}}" wx:for="{{productDetailData.noRepeatTypeArray}}" wx:for-item="type" wx:key="key" bindtap="clickChangeProp1" data-type="{{type}}" data-index="{{index}}">{{type.active}}{{type.propName1}}</view>
+                    </view>
+                    <view class="choose-color border-bottom" wx:if="{{productDetailData.isBatchChoose && productDetailData.batchData!=0 && productDetailData.property2}}">
+                        <view>{{productDetailData.property2}}: </view>
+                        <view bindtap="clickSize"
+                              class="unit-chunk {{size.stockQty == 0 || size.isAllHave != productDetailData.batchType.length?'unusable':''}} {{size.active?'active':''}}"
+                              wx:for="{{productDetailData.batchData}}" wx:for-item="size" data-index="{{index}}">{{size.active}}{{size.propName2}}</view>
+                    </view>
+                    <view class="stock-edit-num" wx:if="{{productDetailData.isBatchChoose}}">
+                        <span class="text">数量：</span>
+                        <view class="batch-num-edit">
+                            <span class="button desc {{userInput < 1 || productDetailData.stockQty == 0?'unable':''}}"
+                                  bindtap="clickInventoryNum" data-type="desc" data-user-input="{{userInput}}">
+                                <icon class="iconfont icon-plus-minus"></icon>
+                            </span>
+                            <input type="number"
+                                   class="num-input {{!isAllowExceedStock && productDetailData.stockQty == 0?'disabled':''}}"
+                                   value="{{userInput}}"
+                                   bind:change="checkUserInput" data-obj="{{productDetailData}}"
+                                   bind:keydown="keydownCheckQty"
+                                   bind:keyup="keyupUserInput"
+                            />
+                            <span class="button add {{productDetailData.stockQty == 0 || userInput > (productDetailData.stockQty-1)/computedUnitRate?'unable':''}}" bindtap="clickInventoryNum" data-type="add" data-user-input="{{userInput}}"><icon class="iconfont icon-add"></icon></span>
+                        </view>
+                    </view>
+                    <view class="no-batch-stock-edit" wx:if="{{!productDetailData.isBatchChoose}}">
+                        <ul>
+                            <li class="weui-flex" wx:if="{{productDetailData.hasPropNameTwo}}">
+                                <view class="weui-flex__item" wx:if="{{productDetailData.property2}}">{{productDetailData.property2}}</view>
+                                <view class="weui-flex__item" wx:if="{{showStockQty!=0}}">库存</view>
+                                <view class="weui-flex__item">数量</view>
+                            </li>
+                            <!--!productDetailData.hasPropNameTwo-->
+                            <li wx:for="{{productDetailData.skus}}" wx:for-item="size"
+                                wx:if="{{size.isShow && !productDetailData.hasPropNameTwo}}"
+                                class="no-two-prop">
+                                <view class="stock-num" wx:if="{{showStockQty!=0}}">库存：{{productDetailData.howToShowStockQty}}</view>
+                                <view class="stock-edit-content">
+                                    <span class="text">数量：</span>
+                                    <view class="num-edit">
+                                        <span class="desc {{userInput < 1 || productDetailData.stockQty == 0?'unable':''}}" bindtap="clickInventoryNum" data-type="desc" data-user-input="{{userInput}}"><icon class="iconfont icon-plus-minus"></icon></span>
+                                        <input type="number"
+                                               class="num-input {{!isAllowExceedStock && productDetailData.stockQty == 0?'disabled':''}}"
+                                               bind:input="bindInput" value="{{userInput}}"
+                                               bind:change="checkUserInput" data-obj="{{size}}"
+                                               bind:keydown="keydownCheckQty"
+                                               bind:keyup="keyupUserInput"
+                                        />
+                                        <span class="add {{productDetailData.stockQty == 0 || userInput > (productDetailData.stockQty-1)/computedUnitRate?'unable':''}}" bindtap="clickInventoryNum" data-type="add" data-user-input="{{userInput}}"><icon class="iconfont icon-add"></icon></span>
+                                    </view>
+                                </view>
+                            </li>
+                            <!--!productDetailData.hasPropNameTwo end-->
+                            <!--productDetailData.hasPropNameTwo start-->
+                            <li wx:for="{{productDetailData.skus}}" wx:for-item="size" wx:if="{{size.isShow && productDetailData.hasPropNameTwo}}" class="weui-flex">
+                                <view class="weui-flex__item" wx:if="{{size.propName2}}">{{size.propName2}}</view>
+                                <view class="weui-flex__item" wx:if="{{showStockQty!=0&&size.propName2}}">{{size.howToShowStockQty}}
+                                    <span wx:if="{{showStockQty==1}}">{{productDetailData.unit}}</span>
+                                </view>
+                                <view class="weui-flex__item" wx:if="{{size.propName2}}">
+                                    <view class="stock-edit-content no-batch-input">
+                                        <view class="num-edit">
+                                            <span class="desc {{size.userInput < 1 || productDetailData.stockQty == 0?'unable':''}}"
+                                                  bindtap="clickNoBatchNum" data-type="desc" data-index="{{index}}">
+                                                <icon class="iconfont icon-plus-minus"></icon>
+                                            </span>
+                                            <input type="number"
+                                                   class="num-input {{!isAllowExceedStock && productDetailData.stockQty == 0?'disabled':''}}"
+                                                   value="{{size.userInput}}"
+                                                   bind:change="keyuptNoBatchNum"
+                                                    data-index="{{index}}"
+                                                    data-obj="{{size}}"
+                                                   bind:keydown="keydownCheckQty"
+                                                   bind:keyup="keyupUserInput"
+                                            />
+                                            <span class="add {{productDetailData.stockQty == 0 || size.userInput > (productDetailData.stockQty-1)/computedUnitRate?'unable':''}}"
+                                                  bindtap="clickNoBatchNum" data-type="add" data-index="{{index}}">
+                                                <icon class="iconfont icon-add" ></icon>
+                                            </span>
+                                        </view>
+                                    </view>
+                                </view>
+                            </li>
+                            <!--productDetailData.hasPropNameTwo start-->
+                        </ul>
+                    </view>
+                </view>
+            </view>
+            <!--多属性-->
+        </view>
+        <view class="flex-0 action-bar">
+            <view class="number-money-space">
+                <span class="number more-than">共{{totalClass}}种{{totalNum}}{{productDetailData.selectedUnitName}}</span>
+                <span class="money">￥{{filter.formatPrice(totalPrice)}}</span>
+            </view>
+            <view class="weui-flex">
+                <view class="weui-flex__item">
+                    <view bindtap="clickCollectProduct" class="button-fill collect">
+                        {{productDetailData.isCollected}}
+                        <i class="iconfont {{productDetailData.isCollected?'icon-star':'icon-star1'}}"></i>
+                        <span wx:if="{{!productDetailData.isCollected}}">加入收藏</span>
+                        <span wx:if="{{productDetailData.isCollected}}">取消收藏</span>
+                    </view>
+                </view>
+                <view class="weui-flex__item">
+                    <view bindtap="clickAddToCartBtn" class="button-fill {{productDetailData.stockQty>0?'add-to-cart':'disabled-color'}}">
+                        <icon class="iconfont icon-gouwuche"></icon>
+                        <span wx:if="{{!isAllowExceedStock && productDetailData.stockQty == 0}}">已售罄</span>
+                        <span wx:if="{{isAllowExceedStock && productDetailData.stockQty>0}}">加入购物车</span>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

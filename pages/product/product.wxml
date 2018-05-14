@@ -2,10 +2,9 @@
 <view>
     <base-search-header show-cart="true" show-back="true" showScreen="{{queryData}}"></base-search-header>
     <!--nav begin-->
-    <base-product-nav bind:changeBigProduct="changeBigProduct" show-big-productList="showBigProductList" bind:doNavReq="doInitPage"></base-product-nav>
+    <base-product-nav bind:change-big-product="changeBigProduct" showBigProductList="{{showBigProductList}}" bind:do-nav-req="doInitPage" queryData="{{queryData}}"></base-product-nav>
     <!--nav end-->
     <!--product list-->
-    <span>{{showBigProductList}}</span>
-    <base-product-list show-big-productList="showBigProductList" list-data="{{productData}}"></base-product-list>
+    <base-product-list bind:get-product-detail-msg="getProductDetailMsg" showBigProductList="{{showBigProductList}}" list-data="{{productData}}"></base-product-list>
     <!--product list-->
 </view>

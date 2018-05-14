@@ -1,4 +1,4 @@
-<view class="page">
+<view class="page" style="{{showModalStatus?'height:100%;overflow:hidden':''}}">
   <base-search-header showCategory="true" showCart="false"></base-search-header>
   <view>
     <!--banner start-->
@@ -6,7 +6,7 @@
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-dots="{{indicatorDots}}" indicator-color="indicatorColor" indicator-active-color="{{indicatorActiveColor}}">
       <block wx:for="{{bannerNoticeData.bannerData}}" wx:key="key">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" height="150"/>
+          <image src="{{item.mobileUrl}}" class="slide-image" height="150"/>
         </swiper-item>
       </block>
     </swiper>
@@ -64,7 +64,7 @@
         <text>{{bannerNoticeData.goodsLabelData.recommendLabel}}</text>
         <navigator url="/pages/product/product?isRecommend=1&includeOOS=1&label={{bannerNoticeData.goodsLabelData.recommendLabel}}" hover-class="none" class="all-goods">更多 <icon class="iconfont icon-leftarrow-copy"></icon></navigator>
       </view>
-      <base-product-list showBigProductList="true" marginTop="0" bind:myevent="onMyEvent" list-data="{{productRecommendData}}"></base-product-list>
+      <base-product-list showBigProductList="true" marginTop="0" bind:get-product-detail-msg="getProductDetailMsg" list-data="{{productRecommendData}}"></base-product-list>
     </view>
     <!--goods end-->
     <!--new begin-->
@@ -73,7 +73,7 @@
         <text>{{bannerNoticeData.goodsLabelData.newsLabel}}</text>
         <navigator url="/pages/product/product?isNew=1&includeOOS=1&label={{bannerNoticeData.goodsLabelData.newsLabel}}" class="all-goods">更多 <icon class="iconfont icon-leftarrow-copy"></icon></navigator>
       </view>
-      <base-product-list showBigProductList="true" marginTop="0" bind:myevent="onMyEvent" list-data="{{productNewData}}"></base-product-list>
+      <base-product-list showBigProductList="true" marginTop="0" bind:get-product-detail-msg="getProductDetailMsg" list-data="{{productNewData}}"></base-product-list>
     </view>
     <!--new end-->
     <!--promotion start-->
@@ -82,7 +82,7 @@
         <text>{{bannerNoticeData.goodsLabelData.promotionLabel}}</text>
         <navigator url="/pages/product/product?isPromotion=1&includeOOS=1&label={{bannerNoticeData.goodsLabelData.promotionLabel}}" class="all-goods">更多 <icon class="iconfont icon-leftarrow-copy"></icon></navigator>
       </view>
-      <base-product-list showBigProductList="true" marginTop="0" bind:myevent="onMyEvent" list-data="{{productPromotionData}}"></base-product-list>
+      <base-product-list showBigProductList="true" marginTop="0" bind:get-product-detail-msg="getProductDetailMsg" list-data="{{productPromotionData}}"></base-product-list>
     </view>
     <!--promotion start-->
     <!--hot start-->
@@ -91,9 +91,12 @@
         <text>{{bannerNoticeData.goodsLabelData.hotLabel}}</text>
         <navigator url="/pages/product/product?isHot=1&includeOOS=1&label={{bannerNoticeData.goodsLabelData.hotLabel}}" class="all-goods">更多 <icon class="iconfont icon-leftarrow-copy"></icon></navigator>
       </view>
-      <base-product-list showBigProductList="true" marginTop="0" list-data="{{productHotData}}"></base-product-list>
+      <base-product-list bind:get-product-detail-msg="getProductDetailMsg" showBigProductList="true" marginTop="0" list-data="{{productHotData}}"></base-product-list>
     </view>
     <!--hot end-->
   </view>
-  <product-detail-popup list-data="{{productDetailData}}"></product-detail-popup>
+  <!--遮罩层-->
 </view>
+<view class="commodity_screen" catch:touchmove="true" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<!--购物车弹出框-->
+<product-detail-popup catch:touchmove="true" bind:close-popup="hideModal" class="commodity_attr_box" wx:if="{{showModalStatus}}" animation="{{animationData}}" product-detail-data="{{productDetailData}}" flag="1"></product-detail-popup>

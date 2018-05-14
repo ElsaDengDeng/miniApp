@@ -47,21 +47,50 @@ Component({
       if (obj){
         if (obj.label) {
           this.data.screenText.push(obj.label);
-          var screenText = this.data.screenText;
-          this.setData({
-            'screenText':screenText,
-            'isShowScreen':true
-          })
+          this.dealPush();
         }
         if (obj.keyWord){
           this.data.screenText.push(obj.keyWord);
-          var screenText = this.data.screenText;
-          this.setData({
-            'screenText': screenText,
-            'isShowScreen': true
-          })
+          this.dealPush();
+        }
+        if (obj.classId) {
+          this.data.screenText.push(obj.className);
+          this.dealPush()
+        }
+        if (obj.includeOOS == 0) {
+          this.data.screenText.push('不显示缺货')
+          this.dealPush()
+        }
+        if (obj.minPrice && !obj.maxPrice) {
+          this.data.screenText.push(obj.minPrice);
+          this.dealPush();
+        } else if(obj.maxPrice && !obj.minPrice) {
+          this.data.screenText.push(obj.maxPrice)
+          this.dealPush();
+        } else if(obj.minPrice && obj.maxPrice) {
+          this.data.screenText.push(obj.minPrice+"-"+obj.maxPrice);
+          this.dealPush()
+        }
+
+        if (obj.brandId && obj.brandId.indexOf(",")===-1) {
+          this.data.screenText.push(obj.brandName);
+          this.dealPush()
+        } else if(obj.brandId && obj.brandId.indexOf(",")>-1) {
+          if (typeof (obj.brandName) != "object") obj.brandName = obj.brandName.split(",");
+          for (let i=0; i<obj.brandName.length; i++) {
+            this.data.screenText.push(obj.brandName[i]);
+            this.dealPush()
+          }
         }
       }
+    },
+    //统一处理向screenText push的方法
+    dealPush: function () {
+      var screenText = this.data.screenText;
+      this.setData({
+        'screenText': screenText,
+        'isShowScreen': true
+      })
     },
     doScan: function () {
       scankit.scanCode(this.goSearchByKey)

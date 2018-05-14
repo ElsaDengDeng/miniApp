@@ -1,7 +1,6 @@
 // pages/product/product.js
 var productApi = require('../../utils/controller/product')
 var appconfig = require('../../utils/appconfig')
-var vm  = null;
 Page({
   /**
    * 页面的初始数据
@@ -23,7 +22,6 @@ Page({
    */
   onLoad: function (options) {
     console.log(options); //option 为首页点击更多传值过来的数据  为search组件传值过来的searchValue
-    // 两种情况  一种是监听从子组件navType传值过来的option.detail
     this.doInitPage(options);
     // this.dealMessage('正在加载数据...')
   },
@@ -82,7 +80,6 @@ Page({
         'pageIndex': this.data.pageIndex +1
       })
     }
-    console.log(this.data.productData)
   },
 
   dealMergeObj: function (obj1, obj2, isSaveSameKey) {
@@ -96,8 +93,12 @@ Page({
   },
   changeBigProduct: function (e) {
     this.setData({
-      'showBigProductList':!e.detail.showBigProductList
+      'showBigProductList':e.detail.showBigProductList
     })
+  },
+  //获取商品详情信息
+  getProductDetailMsg: function (event) {
+    console.log(event)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

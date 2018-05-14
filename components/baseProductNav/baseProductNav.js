@@ -1,12 +1,12 @@
 // components/baseProductNav/baseProductNav.js
-var behaviorsControls = require('../../utils/behaviors/product-behaviors')
+var productControls = require('../../utils/behaviors/product-behaviors')
 Component({
-  behaviors: [behaviorsControls],
+  behaviors: [productControls],
   /**
    * 组件的属性列表
    */
   properties: {
-    // showBigProductList: Boolean, //抽出为behaviors公共属性
+    // showBigProductList: Boolean
   },
 
   /**
@@ -27,7 +27,7 @@ Component({
         'showBigProductList':this.data.showBigProductList
       })
       var detail = {showBigProductList: this.data.showBigProductList}
-        this.triggerEvent('changeBigProduct', detail)
+      this.triggerEvent('change-big-product', detail)
     },
     clickChangeNav: function (e) {
       var state = e.currentTarget.dataset.state;
@@ -56,10 +56,35 @@ Component({
     },
     doNavReq: function (id) {
       var detail = {orderSelect:id}
-      this.triggerEvent('doNavReq',detail)
+      this.triggerEvent('do-nav-req',detail)
     },
     clickGoProductScreen: function () {
-      console.log(this.data.query)
+      var queryData = this.data.queryData;
+      var query = {};
+      if (queryData.brandId) query.brandId = queryData.brandId;
+      if (queryData.minPrice) query.minPrice = queryData.minPrice;
+      if (queryData.maxPrice) query.classId = queryData.maxPrice;
+      if (queryData.isSalesPromotion) query.isSalesPromotion = queryData.isSalesPromotion;
+      if (queryData.isNew) {
+        query.isNew = queryData.isNew;
+        query.newsLabel = queryData.label;
+      }
+      if (queryData.isHot) {
+        query.isHot = queryData.isHot;
+        query.hotLabel = queryData.label;
+      }
+      if (queryData.isPromotion) {
+        query.isPromotion = queryData.isPromotion;
+        query.promotionLabel = queryData.label;
+      }
+      if (queryData.isRecommend) {
+        query.isRecommend = queryData.isRecommend;
+        query.recommendLabel = queryData.label;
+      }
+      if (queryData.includeOOS) query.includeOOS = queryData.includeOOS;
+      wx.navigateTo({
+        url: '/pages/product/productScreen/productScreen?query'
+      })
     }
   }
 })

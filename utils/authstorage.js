@@ -66,7 +66,7 @@ const func = require('./functionutils')
     this.setProfileID('');
     this.setLoginName('');
     wx.redirectTo({
-      url: '/pages/logs/logs'
+      url: '/pages/login/login'
     })
     // window.location.reload();
   }

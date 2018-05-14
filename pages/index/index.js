@@ -1,6 +1,6 @@
 const productApi = require('../../utils/controller/product')
 const appconfig  = require('../../utils/appconfig')
-
+const authLib = require('../../utils/authstorage')
 
 
 Page({
@@ -34,7 +34,8 @@ Page({
     interval: 3000,
     duration: 100,
 
-
+    showModalStatus: false,
+    animationData: {},
   },
   // 初次加载执行逻辑
   init: function () {
@@ -49,10 +50,6 @@ Page({
    */
   onLoad: function () {
     this.init();
-  },
-  onMyEvent: function (e) {
-    console.log(e)
-    e.detail;
   },
   clickNoticeItem: function(e) {
     var id = e.currentTarget.id;
@@ -87,10 +84,10 @@ Page({
     _this.getProductListMsg();
   },
   getProductListMsg: function () {
-    this.getSalesRecommend();
+    // this.getSalesRecommend();
     // this.getSalesPromotion();
     // this.getSalesHot();
-    // this.getSalesNew();
+    this.getSalesNew();
   },
   dealBannerNotice: function(result) {
     this.setData({
@@ -100,7 +97,7 @@ Page({
       'bannerNoticeData.goodsLabelData.allLabel' : '全部商品',
       'bannerNoticeData.goodsLabelData.collectionLabel': '收藏商品'
     })
-    // console.log(this.data.bannerNoticeData.noticeData)
+    console.log(this.data.bannerNoticeData)
   },
   /*-- 获取推荐 --*/
   getSalesRecommend: function(){
@@ -194,13 +191,72 @@ Page({
       })
     });
   },
+  getProductDetailMsg: function (e) {
+    var id = e.detail.id;
+    if (!authLib.checkIsAuthed()) {
+      wx.redirectTo({
+        url: '/pages/login/login'
+      });
+      return;
+    }
+    if (this.data.productDetailData !== undefined) {
+      if (id == this.data.productDetailData.id) {
+        this.showModal();
+        wx.hideTabBar();
+        return;
+      }
+    }
+    productApi.getProductDetail(this, {productId: id}, (result)=>{
+      this.setData({
+        'productDetailData': result,
+      })
+      this.showModal();
+      wx.hideTabBar();
+    })
+  },
+  showModal: function () {
+    var animation = wx.createAnimation({
+      duration: 200,
+      timeFunction: 'linear',
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      'animationData': animation.export(),
+      'showModalStatus': true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        'animationData': animation.export()
+      })
+    }.bind(this), 200)
+  },
+  hideModal: function () {
+    var animation = wx.createAnimation({
+      duration: 200,
+      timeFunction: 'linear',
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      'animationData': animation.export()
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        'animationData': animation.export(),
+        'showModalStatus': false
+      })
+    }.bind(this), 200)
+    wx.showTabBar();
+  },
+  // 控制显示弹出窗
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */

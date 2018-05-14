@@ -10,7 +10,7 @@
                 <icon class="weui-label iconfont icon-user"></icon>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" placeholder="请输入登录账号" type="text" bindinput='bindloginname'></input>
+                <input class="weui-input" placeholder="请输入登录账号" type="text" bindinput="bindusername" />
             </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -18,7 +18,7 @@
                 <icon class="weui-label iconfont icon-password"></icon>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" placeholder="请输入登录密码" type="password" bindinput='bindpassword'></input>
+                <input class="weui-input" placeholder="请输入登录密码" type="password" bindinput="bindpassword"/>
             </view>
         </view>
     </view>

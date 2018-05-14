@@ -96,7 +96,7 @@ function keydownCheckQty(event) {
 
     //小数点
     if (event.keyCode == 110 || event.keyCode == 190) {
-      var numText = event.currentTarget.value;
+      var numText = event.detail.value;
       event.returnValue = (numText != "" && numText.indexOf('.') < 0);
     } else
       event.returnValue = true;
@@ -121,16 +121,16 @@ function keydownNumber(event) {
 
 //数量 change事件
 function changeformatQty(event, defaultValue) {
-  var num = event.currentTarget.value;
+  var num = event.detail.value;
   if (num != "" && typeof(num) != "undefined") {
     var number = parseFloat(num);
     if (number < 0 || isNaN(number)) {
-      event.currentTarget.value = defaultValue == undefined ? 1 : defaultValue;
+      event.detail.value = defaultValue == undefined ? 1 : defaultValue;
       return;
     }
 
     if (number > appconfig.maxmunber) {
-      event.currentTarget.value = appconfig.maxmunber;
+      event.detail.value = appconfig.maxmunber;
       return;
     }
 
@@ -142,28 +142,28 @@ function changeformatQty(event, defaultValue) {
       //处理特殊情况的导致的科学计数法，如 0.0000005
       if(num.toString().substring(0,7) == '0.00000'){
         console.log('0.00000');
-        event.currentTarget.value = '0'
+        event.detail.value = '0'
         return;
       }
       value = number.toFixed(4);
     }
-    event.currentTarget.value = value;
+    event.detail.value = value;
   } else {
-    event.currentTarget.value = defaultValue == undefined ? 1 : defaultValue;
+    event.detail.value = defaultValue == undefined ? 1 : defaultValue;
   }
 }
 //金额 change事件
 function changeformatTotal(event, defaultValue) {
-  var num = event.currentTarget.value;
+  var num = event.detail.value;
   if (num != "" && typeof(num) != "undefined") {
     var number = parseFloat(num);
     if (number < 0) {
-      event.currentTarget.value = defaultValue == undefined ? 1 : defaultValue;
+      event.detail.value = defaultValue == undefined ? 1 : defaultValue;
       return;
     }
 
     if (number > appconfig.maxmunber) {
-      event.currentTarget.value = appconfig.maxmunber;
+      event.detail.value = appconfig.maxmunber;
       return;
     }
 
@@ -174,9 +174,9 @@ function changeformatTotal(event, defaultValue) {
     if ((length - (index + 1)) > 2) {
       value = number.toFixed(2);
     }
-    event.currentTarget.value = value;
+    event.detail.value = value;
   } else {
-    event.currentTarget.value = defaultValue == undefined ? 1 : defaultValue;
+    event.detail.value = defaultValue == undefined ? 1 : defaultValue;
   }
 }
 

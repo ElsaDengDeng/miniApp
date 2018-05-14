@@ -2,8 +2,7 @@ const lib = require('../util');
 const appconfig = require('../appconfig');
 const loginApi = require('../apipath')
 const accountMethod  = require('./account')
-const system = require('./system')
-// console.log(loginApi.getApiConfig().login)
+const system = require('../system')
 
 function doAutoLogin(vm, autoLoginCallback) {
   var wxOpenId = lib.auth.getWXOpenID();
@@ -32,19 +31,22 @@ function doWXAuth(vm, autoLoginCallback) {
   }
 }
 
-function doPassAuth(vm, bindToWx) {
+function doPassAuth(vm, bindToWx, app) {
  if (lib.auth.checkIsAuthed()) {
    this.toBackUrl(vm);
  } else {
    var lname = vm.data.userName;
    var lpass = vm.data.password;
    var _this = this;
-   lib.http.postWidthPreloader(vm, loginApi.getApiConfig().login, { userName: lname, password: lpass}, function (response) {
+   lib.http.postWidthPreloader(vm, loginApi.getApiConfig().login, {
+     userName: lname,
+     password: lpass
+   }, function (response) {
      lib.auth.setAuthToken(response.data.token);
      lib.auth.setProfileID(response.data.profileId);
      lib.auth.setLoginName(lname);
-     system.getGlobalInfo(vm);
-     if(bindToWx && appconfig.demoAccounts.indexOf(lname)==-1) {
+     system.getGlobalInfo(vm, app);
+     if (bindToWx && appconfig.demoAccounts.indexOf(lname) == -1) {
        var resOpenId = response.data.openId;
        var authOpenId = lib.auth.getWXOpenID();
        _this.bindToWx(vm, resOpenId, authOpenId);

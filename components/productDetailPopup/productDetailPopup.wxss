@@ -1,1 +1,344 @@
-/* components/productDetailPopup/productDetailPopup.wxss */
+@import "../../static/img/font/iconfont.wxss";
+@import "../../static/style/weui.wxss";
+.popup-content{
+    font-size: 30rpx;
+}
+.product-detail-content{
+    max-height: 800rpx;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 190rpx;
+}
+.flex-0{
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.flex-1{
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+.basic-info{
+    min-height: 180rpx;
+    padding: 20rpx 26rpx;
+    border-bottom: solid 1px #e1e1e1;
+    position: relative;
+}
+.img-item{
+    width: 150rpx;
+    margin-right: 20rpx;
+    text-align: center;
+    float: left;
+}
+.img-item image{
+    width: 150rpx;
+    height: 150rpx;
+}
+.basic-content-item{
+    color: #727272;
+    font-size: 26rpx;
+}
+.basic-name{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #3d4145;
+    font-size: 30rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    padding-right: 35rpx;
+}
+.basic-number{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 10rpx;
+}
+.basic-number .unit{
+    display: block;
+    margin-right: 26rpx;
+}
+.basic-number .number{
+    display: block;
+}
+.basic-price{
+    color: #f65a44;
+    font-size: 26rpx;
+    margin-top: 20rpx;
+}
+.basic-price .color{
+    color: #727272;
+}
+.basic-price .unit-icon{
+    font-size: 24rpx;
+}
+.basic-price .market-price{
+    text-decoration: line-through;
+    margin-left: 20rpx;
+}
+.icon-delete{
+    position: absolute;
+    right: 26rpx;
+    top: 0;
+    padding: 5rpx;
+}
+
+
+.choose-items{
+    font-size: 30rpx;
+}
+
+.order-number-unit{
+    min-height: 118rpx;
+    padding: 0 26rpx;
+    overflow: hidden;
+}
+.batch-btn .iconfont{
+    color: #f65a44;
+    padding-right: 10rpx;
+    font-size: 40rpx;
+}
+.h80{
+    line-height: 80rpx;
+    height: 80rpx;
+}
+.unit-chunk{
+    margin: 6rpx 26rpx 6rpx 40rpx;
+    display: inline-block;
+    min-width: 110rpx;
+    padding:0 20rpx;
+    height: 52rpx;
+    line-height: 52rpx;
+    background-color: #eee;
+    border-radius: 3px;
+    font-size: 28rpx;
+    color: #000;
+    text-align: center;
+    max-width: 686rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.choose-single{
+    padding: 0 26rpx;
+}
+.stock-num{
+    float: left;
+    color: #8c8c8c;
+    line-height: 120rpx;
+}
+.stock-edit-content{
+    float: right;
+    width: 396rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    position: relative;
+}
+.stock-edit-content .text{
+    display: inline-block;
+    position: relative;
+    bottom: 6rpx;
+}
+.stock-edit-content .num-edit{
+    top: 30rpx;
+}
+.num-edit{
+    position: absolute;
+    right: 0;
+    left: 104rpx;
+    width: 244rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    display: inline-block;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+}
+.num-edit .desc{
+    left: 0;
+    top: 0;
+}
+.num-edit .add{
+    right: 0;
+    top: 0;
+}
+.num-edit span{
+    position: absolute;
+    width: 60rpx;
+    height: 100%;
+    line-height: 100%;
+    border: none;
+    background-color: #fff;
+    text-align: center;
+}
+.num-edit .iconfont{
+    color: #323232;
+    font-size: 36rpx;
+    font-weight: bold;
+    position: relative;
+    bottom: 5.6rpx;
+    right: 1.6rpx;
+}
+.num-edit .num-input{
+    position: absolute;
+    top: 0;
+    left: 60rpx;
+    width: 116rpx;
+    height: 100%;
+    font-size: 28rpx;
+    text-align: center;
+    padding: 0;
+    color: #323232;
+    background-color: #fff;
+    border-top: none;
+    border-bottom: none;
+    border-left: solid 1px #e6e6e6;
+    border-right: solid 1px #e6e6e6;
+    text-align: center;
+}
+.choose-size{
+
+}
+.choose-color{
+    padding: 10rpx 26rpx;
+}
+.batch-num-edit{
+    position: relative;
+}
+.batch-num-edit .iconfont{
+    color: #323232;
+}
+.border-bottom {
+    border-bottom: 1px solid #d6d7dc;
+}
+.unable .iconfont{
+    color: #d4d4d4;
+}
+.disabled{
+    color: #d4d4d4;
+}
+.action-bar{
+    height: 190rpx;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.number-money-space{
+    height: 78rpx;
+    line-height: 78rpx;
+    padding: 0 26rpx;
+    overflow: hidden;
+    text-align: right;
+}
+.more-than{
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 40%;
+    vertical-align: middle;
+    text-align: left;
+}
+.number-money-space .number{
+    color: #727272;
+    font-size: 26rpx;
+}
+.number-money-space .money{
+    color: #f65a44;
+}
+.action-bar .button-fill{
+    font-size: 34rpx;
+    line-height: 116rpx;
+    height: 110rpx;
+    border: none;
+    text-align: center;
+}
+.action-bar .button-fill .iconfont{
+    font-size: 41rpx;
+    padding-right: 10rpx;
+}
+.collect .iconfont{
+    color: #f65a44;
+}
+.action-bar .collect{
+    background-color: #e6e6e6;
+}
+.add-to-cart{
+    background-color: #f65a44;
+    color: #fff;
+    font-size: 34rpx;
+    line-height: 116rpx;
+}
+.disabled-color{
+    background-color: #c8c9cb;
+}
+.active{
+    background: #F65A44;
+    color: #fff;
+}
+.stock-edit-num{
+    position: relative;
+    padding: 10rpx 26rpx;
+    height: 100rpx;
+    padding-left: 26rpx;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 30rpx;
+}
+.stock-edit-num .text{
+    display: inline-block;
+}
+.stock-edit-num .batch-num-edit{
+    height: 52rpx;
+    line-height: 52rpx;
+    display: inline-block;
+    border: 1px solid #e6e6e6;
+}
+.stock-edit-num .num-input{
+    height: 52rpx;
+    line-height: 52rpx;
+    width: 116rpx;
+    display: inline-block;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    text-align: center;
+}
+.stock-edit-num .button{
+    display: inline-block;
+    height: 52rpx;
+    line-height: 52rpx;
+    width: 60rpx;
+    text-align: center;
+}
+.stock-edit-num .button icon{
+    margin-top: -42rpx;
+}
+.no-batch-stock-edit{
+    padding: 10rpx 26rpx;
+    box-sizing: border-box;
+}
+.no-batch-stock-edit li{
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+}
+.no-batch-input{
+    width: 200rpx;
+    height: 46rpx;
+    line-height: 80rpx;
+    float: left;
+}
+.no-batch-input .desc, .no-batch-input .add{
+    width: 60rpx;
+}
+.no-batch-input .num-edit{
+    left: 0;
+    top: 10rpx;
+}
+.no-batch-input .number{
+    width: 120rpx;
+}
+.no-two-prop .text{
+    position: absolute;
+    left: 0;
+    display: inline-block;
+}

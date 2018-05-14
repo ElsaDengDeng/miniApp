@@ -5,7 +5,7 @@
         <view class="goods-screen-label-box">
             <view class="screen-title">标签</view>
             <ul>
-                <li wx:for="{{goodsLabel}}" class="{{item.active?'active':''}}" bindtap="clickToggleClass">{{item.text}}</li>
+                <li wx:for="{{goodsLabel}}" wx:key="key" class="{{item.active?'active':''}}" bindtap="clickToggleClass">{{item.text}}</li>
             </ul>
         </view>
         <view class="goods-screen-label-box goods-screen-price">
@@ -21,7 +21,7 @@
         <view class="goods-screen-label-box goods-screen-price">
             <view class="screen-title">品牌</view>
             <ul class="brand-ul">
-                <li wx:for="{{screenData}}" bindtap="clickToggleClass" class="{{item.active?'active':''}}">{{item.name}}</li>
+                <li wx:for="{{screenData}}" wx:key="key" bindtap="clickToggleClass" class="{{item.active?'active':''}}">{{item.name}}</li>
             </ul>
         </view>
         <view class="goods-screen-label-box goods-screen-price">

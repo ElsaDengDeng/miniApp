@@ -1,6 +1,23 @@
 //app.js
+var storage = require('./utils/authstorage')
+var system = require('./utils/system')
 App({
   onLaunch: function () {
+    Object.defineProperty(Array.prototype,'filter',{
+      writable:true,
+      configurable:true,
+      enumerable:false,
+      value:function(){
+        var arr=this
+        var fn=arguments[0]
+        var laterArr=[]
+        for(var i=0;i<arr.length;i++){
+          var item=arr[i]
+          fn.call(this,item,i)?laterArr.push(item):''
+        }
+        return laterArr
+      }
+    })
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -32,8 +49,26 @@ App({
         }
       }
     })
+    //判断自动登录
+    if (!storage.checkIsAuthed()) {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      })
+    }else {
+      var vm=this
+      system.loadGlobalInfo(this,function(vm){
+        wx.setTabBarBadge({
+          'index': 1,
+          text: vm.globalData.cartCount.toString()
+        })
+      })
+    }
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    isFirstIn: true,
+    messageCount: 0,
+    cartCount: 0,
+    cartItemData: []
   }
 })

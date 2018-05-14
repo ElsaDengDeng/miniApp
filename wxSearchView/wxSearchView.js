@@ -55,7 +55,6 @@ function init(that, hotKeys, tipKeys, searchFunction, goBackFunction) {
 // 搜索框输入时候操作
 function wxSearchInput(e) {
   var inputValue = e.detail.value;
-  console.log(e.detail.value);
   // 页面数据
   var temData = __that.data.wxSearchData;
   // 寻找提示值 
